@@ -7,12 +7,16 @@ const app = express()
 const booksRoutes = require("./routes/books")
 const userRoutes = require("./routes/user")
 
+const dotenv = require("dotenv")
+dotenv.config()
+
 // Connexion à MongoDB
-mongoose.connect("mongodb+srv://champloo63:VIgT5DQpFtXiNZ9i@cluster0.m7cs0z6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"))
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("Connexion à MongoDB réussie !"))
+.catch(() => console.log("Connexion à MongoDB échouée !"))
 
 // CORS
 app.use((req, res, next) => {
